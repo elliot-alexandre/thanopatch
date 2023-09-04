@@ -19,10 +19,9 @@ interface QueryData {
 }
 
 export default async function List() {
-  const { getTodos } = await request<QueryData>(
-    "http://localhost:3000/api/graphql",
-    query
-  );
+  const endpoint = process.env.GRAPHQL_ENDPOINT as string;
+
+  const { getTodos } = await request<QueryData>(endpoint, query);
 
   return (
     <ul className="space-y-4">

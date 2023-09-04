@@ -12,7 +12,8 @@ const mutation = gql`
 `;
 
 export async function removeTodo(id: number) {
-  const graphQLClient = new GraphQLClient("http://localhost:3000/api/graphql");
+  const endpoint = process.env.GRAPHQL_ENDPOINT as string;
+  const graphQLClient = new GraphQLClient(endpoint);
   await graphQLClient.request(mutation, { id });
   revalidatePath("/");
 }
