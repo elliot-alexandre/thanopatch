@@ -24,8 +24,9 @@ async function addTodo(formData: FormData) {
     formValues[key] = value.valueOf();
   }
 
+  const endpoint = process.env.GRAPHQL_ENDPOINT as string;
   const parsed = await formValuesSchema.parseAsync(formValues);
-  const graphQLClient = new GraphQLClient("http://localhost:3000/api/graphql");
+  const graphQLClient = new GraphQLClient(endpoint);
   await graphQLClient.request(mutation, parsed);
   redirect("/");
 }
